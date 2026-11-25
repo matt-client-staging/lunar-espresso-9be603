@@ -165,7 +165,7 @@ img {
 
 .nav-links > span:hover,
 .nav-links > span:focus-visible {
-  color: #f9c0c1;
+  color: #d8b2b3;
 }
 
 .nav-links .is-current::before {
@@ -182,7 +182,7 @@ img {
 
 .nav-links .is-current:hover::before,
 .nav-links .is-current:focus-visible::before {
-  background-color: #f9c0c1;
+  background-color: #d8b2b3;
 }
 
 .menu-button {
@@ -210,7 +210,7 @@ img {
 }
 
 .menu-button:hover .menu-icon {
-  color: #f9c0c1;
+  color: #d8b2b3;
 }
 
 .menu-button:focus-visible {
