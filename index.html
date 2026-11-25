@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Northern Smiles Dental Hygiene Clinic</title>
+    <!-- Staging only: remove this directive before the public launch. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/hero-bg.png"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./clinic-hours.js" defer></script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <!-- The statement banner stays in normal flow while the navigation can stick. -->
+    <header class="site-header">
+      <div
+        class="hours-bar"
+        role="group"
+        aria-label="Clinic status and hours"
+      >
+        <span id="clinic-status" aria-live="polite" aria-atomic="true">
+          CHECKING HOURS
+        </span>
+        <span class="hours-divider" aria-hidden="true"></span>
+        <span id="clinic-hours">TODAY'S HOURS</span>
+      </div>
+    </header>
+
+    <nav class="site-navigation" aria-label="Main navigation">
+      <img
+        class="site-logo"
+        src="./assets/northernsmiles_logo_transparent.png"
+        alt="Northern Smiles Dental Hygiene Clinic"
+        data-entrance="fade-left"
+        data-entrance-on-load
+      />
+
+      <!-- These are visual labels for now; links will be added later. -->
+      <div
+        class="nav-links"
+        aria-hidden="true"
+        data-entrance="fade-up"
+        data-entrance-on-load
+      >
+        <span class="is-current">HOME</span>
+        <span>SERVICES</span>
+        <span>OUR STAFF</span>
+        <span>ORAL HEALTH FACTS</span>
+        <span>CONTACT</span>
+      </div>
+
+      <!-- The menu button has an accessible target; its toggle action will be added later. -->
+      <button
+        class="menu-button"
+        type="button"
+        aria-label="Open navigation menu"
+        data-entrance="fade"
+        data-entrance-on-load
+      >
+        <svg class="menu-icon" viewBox="0 0 355.65 272.17" aria-hidden="true" focusable="false">
+          <rect width="355.65" height="33.04" fill="currentColor" />
+          <rect y="119.57" width="355.65" height="33.04" fill="currentColor" />
+          <rect x="89.57" y="239.13" width="266.09" height="33.04" fill="currentColor" />
+        </svg>
+      </button>
+    </nav>
+
+    <main>
+      <!-- Hero: the image, background texture, headline, copy, and visual CTA. -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-texture" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <div
+            class="hero-image-frame"
+            role="img"
+            aria-label="Northern Smiles dental hygienist"
+            data-entrance="scale-in"
+            data-entrance-on-load
+          >
+            <div class="photo-border" aria-hidden="true"></div>
+            <img
+              class="hero-portrait is-top"
+              src="./assets/home-portrait.png"
+              loading="eager"
+              fetchpriority="high"
+              alt=""
+              aria-hidden="true"
+            />
+            <img
+              class="hero-portrait is-under"
+              src="./assets/home_slide_img_2.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </div>
+
+          <div class="hero-copy">
+            <h1
+              class="hero-heading"
+              id="hero-heading"
+              data-entrance="fade-up"
+              data-entrance-on-load
+            >
+              <span class="heading-main">Healthy smiles</span>
+              <span class="heading-script">every visit.</span>
+            </h1>
+
+            <p
+              class="hero-description"
+              data-entrance="fade-up"
+              data-entrance-on-load
+            >
+              Your independent <strong>dental hygiene practice</strong> in
+              <strong>Chelmsford</strong>, proudly providing friendly,
+              compassionate, family-focused care where every visit ends with a
+              smile!
+            </p>
+
+            <!-- A styled, non-clickable placeholder for the future contact link. -->
+            <div
+              class="cta-visual"
+              aria-label="Get in touch"
+              data-entrance="fade-up"
+              data-entrance-on-load
+            >
+              <span>GET IN TOUCH</span>
+              <img src="./assets/arrow-right.svg" alt="" aria-hidden="true" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Four short benefits sit directly below the hero. -->
+      <section class="benefits" aria-label="Why choose Northern Smiles">
+        <div class="benefit-grid">
+          <article class="benefit-card" data-entrance="fade-up">
+            <h2>Prevention is key</h2>
+            <p>Take care of problems early with routine dental checkups.</p>
+          </article>
+
+          <article class="benefit-card" data-entrance="fade-up">
+            <h2>Family-focused care</h2>
+            <p>Comfort and care for every family member.</p>
+          </article>
+
+          <article class="benefit-card" data-entrance="fade-up">
+            <h2>Flexible scheduling</h2>
+            <p>Short wait times and reliable appointments.</p>
+          </article>
+
+          <article class="benefit-card" data-entrance="fade-up">
+            <h2>All insurance types accepted</h2>
+            <p>NIHB, CDCP, ODSP, Healthy Smiles, and your private insurance.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

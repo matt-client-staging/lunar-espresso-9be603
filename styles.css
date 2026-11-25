@@ -1,0 +1,1072 @@
+/* Local Figma fonts keep the page looking the same without a web font service. */
+@font-face {
+  font-family: "Albra";
+  src: url("./fonts/Albra Regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Albra";
+  src: url("./fonts/Albra Medium.otf") format("opentype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Photograph Signature";
+  src: url("./fonts/Photograph Signature.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("./fonts/ppneuemontreal-book.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("./fonts/ppneuemontreal-medium.otf") format("opentype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("./fonts/Figtree-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("./fonts/Figtree-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  --burgundy: #774243;
+  --cream: #f5efe6;
+  --card-sand: #e6e0d5;
+  --gold: #e8d7ad;
+  --body-gray: #545352;
+  --divider: rgba(45, 45, 45, 0.15);
+  --hover-accent: #a16869;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--cream);
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  color: #111;
+  background: var(--cream);
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+  /* Keep a clear default size for text without a local font-size rule. */
+  font-size: 16px;
+}
+
+/* Keep Chrome from shifting the scroll threshold as the sticky menu shrinks. */
+main {
+  overflow-anchor: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Mobile is the base layout: a compact header and a vertically stacked hero. */
+.hours-bar {
+  display: flex;
+  height: 4.55vw;
+  min-height: 16px;
+  align-items: center;
+  justify-content: center;
+  gap: 3.69vw;
+  background: #050505;
+  color: #fff;
+  font-size: clamp(10px, 2.5vw, 14px);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.hours-divider {
+  width: 1px;
+  height: 40%;
+  background: rgb(255 255 255 / 75%);
+}
+
+.site-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  height: 16.85vw;
+  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 8.6vw;
+  background: var(--burgundy);
+  transition:
+    height 220ms ease,
+    background-color 220ms ease,
+    backdrop-filter 220ms ease;
+}
+
+/* The navigation sticks below the statement banner and becomes a smaller glass bar. */
+.site-navigation.is-sticky {
+  height: 16.85vw;
+  min-height: 56px;
+  background-color: rgba(245, 239, 230, 0.76);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* Let the logo keep growing as mobile viewports get wider. */
+.site-logo {
+  width: 44.1vw;
+  height: auto;
+  transition: width 220ms ease, filter 220ms ease;
+}
+
+.site-navigation.is-sticky .site-logo {
+  width: 44.1vw;
+  filter: brightness(0) saturate(100%);
+}
+
+.nav-links {
+  display: none;
+}
+
+.nav-links .is-current {
+  position: relative;
+  font-weight: 500;
+}
+
+.nav-links > span {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.nav-links > span:hover,
+.nav-links > span:focus-visible {
+  color: #f9c0c1;
+}
+
+.nav-links .is-current::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 8rem;
+  height: 2px;
+  transform: translateX(-50%);
+  background: #fff;
+  content: "";
+  transition: background-color 160ms ease;
+}
+
+.nav-links .is-current:hover::before,
+.nav-links .is-current:focus-visible::before {
+  background-color: #f9c0c1;
+}
+
+.menu-button {
+  display: flex;
+  width: max(16.85vw, 56px);
+  height: max(16.85vw, 56px);
+  flex: 0 0 max(16.85vw, 56px);
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  /* Expand the target around the icon's previous center point. */
+  transform: translateX(max(4px, calc(8.425vw - 24px)));
+}
+
+.site-navigation.is-sticky .menu-button {
+  width: max(16.85vw, 56px);
+  height: max(16.85vw, 56px);
+  flex-basis: max(16.85vw, 56px);
+  transform: translateX(max(4px, calc(8.425vw - 24px)));
+  color: #000;
+}
+
+.menu-button:hover .menu-icon {
+  color: #f9c0c1;
+}
+
+.menu-button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.menu-icon {
+  display: block;
+  width: clamp(30px, 5.5vw, 42px);
+  max-width: none;
+  height: auto;
+  color: inherit;
+  transition: color 160ms ease;
+}
+
+.site-navigation.is-sticky .nav-links {
+  color: #423f39;
+}
+
+.site-navigation.is-sticky .nav-links .is-current,
+.site-navigation.is-sticky .nav-links > span:hover,
+.site-navigation.is-sticky .nav-links > span:focus-visible {
+  color: #774243;
+}
+
+.site-navigation.is-sticky .nav-links .is-current::before,
+.site-navigation.is-sticky .nav-links .is-current:hover::before,
+.site-navigation.is-sticky .nav-links .is-current:focus-visible::before {
+  background-color: #774243;
+}
+
+.site-navigation.is-sticky .menu-button:hover .menu-icon,
+.site-navigation.is-sticky .menu-button:focus-visible .menu-icon {
+  color: #774243;
+}
+
+.hero {
+  position: relative;
+  min-height: calc(100svh - 21.4vw);
+  overflow: hidden;
+  background: var(--burgundy);
+  color: #fff;
+}
+
+.hero-texture {
+  position: absolute;
+  inset: 0;
+  background-image: url("./assets/hero-bg.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.hero-content {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: inherit;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 9.95vw;
+  padding-left: 8.6vw;
+}
+
+/* The photo frame grows with the viewport; its portrait and gold border scale inside it. */
+.hero-image-frame {
+  position: relative;
+  width: 80.85vw;
+  flex: 0 0 auto;
+  aspect-ratio: 325 / 294;
+}
+
+.photo-border {
+  position: absolute;
+  top: 7.97%;
+  left: 0;
+  width: 95.15%;
+  height: 89.93%;
+  border: 2.4px solid var(--gold);
+}
+
+.hero-portrait {
+  position: absolute;
+  top: 0.65%;
+  left: 4.97%;
+  width: 95.03%;
+  height: 92.77%;
+  opacity: 1;
+  object-fit: cover;
+  transition: opacity 2000ms ease-in-out;
+}
+
+.hero-portrait.is-top {
+  z-index: 2;
+}
+
+.hero-portrait.is-under {
+  z-index: 1;
+}
+
+.hero-portrait.is-fading-out {
+  opacity: 0;
+}
+
+.hero-copy {
+  width: 82.3vw;
+  max-width: 600px;
+  padding: 4.98vw 0 9.95vw;
+}
+
+.hero-heading {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 19.15vw;
+  margin: 0;
+  font-weight: 400;
+}
+
+.heading-main {
+  position: relative;
+  z-index: 1;
+  display: block;
+  color: #fff;
+  font-family: "Albra", Georgia, serif;
+  font-size: clamp(44px, 13.93vw, 116px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.heading-script {
+  position: absolute;
+  z-index: 0;
+  top: 93%;
+  left: 1.63%;
+  display: block;
+  width: 85%;
+  height: 15.67vw;
+  transform: translateY(-50%);
+  color: #c78781;
+  font-family: "Photograph Signature", cursive;
+  font-size: clamp(80px, 24.88vw, 207px);
+  font-weight: 400;
+  /* The decorative font creates oversized selection bounds, so keep this phrase unselectable. */
+  -webkit-user-select: none;
+  user-select: none;
+  line-height: 0.63;
+  white-space: nowrap;
+}
+
+.hero-description {
+  margin: 21.14vw 0 12.44vw;
+  color: #fff;
+  font-size: clamp(16px, 4.975vw, 42px);
+  line-height: 1.25;
+}
+
+.hero-description strong {
+  font-weight: 500;
+}
+
+.cta-visual {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 20.6875rem;
+  height: clamp(56px, 11.64vw, 64px);
+  align-items: center;
+  background: var(--burgundy);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 160ms ease;
+}
+
+.cta-visual:hover {
+  background-color: var(--hover-accent);
+}
+
+.cta-visual span {
+  margin-left: clamp(24px, 5.29vw, 35px);
+  font-size: clamp(16px, 3.33vw, 24px);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cta-visual img {
+  position: absolute;
+  top: 50%;
+  right: 8.2%;
+  width: clamp(32px, 5.5vw, 48px);
+  height: auto;
+  transform: translateY(-50%);
+  transition: transform 180ms ease;
+}
+
+.cta-visual:hover img {
+  transform: translate(5px, -50%);
+}
+
+.benefits {
+  /* Keep the extra gap outside this block so the page background shows through. */
+  margin-bottom: clamp(2rem, 4vw, 4rem);
+  background: var(--card-sand);
+}
+
+.benefit-grid {
+  /* Flexbox wraps the cards on mobile and forms one row at wider widths. */
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.benefit-card {
+  display: flex;
+  min-width: 0;
+  min-height: 50.8vw;
+  flex: 0 0 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8vw 7vw;
+  text-align: center;
+}
+
+.benefit-card:nth-child(odd) {
+  border-right: 1px solid var(--divider);
+}
+
+.benefit-card:nth-child(-n + 2) {
+  border-bottom: 1px solid var(--divider);
+}
+
+.benefit-card h2 {
+  max-width: 100%;
+  margin: 0 0 5.2vw;
+  color: #111;
+  font-family: "Albra", Georgia, serif;
+  font-size: clamp(16px, 5.1vw, 43px);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.benefit-card p {
+  max-width: 24vw;
+  margin: 0;
+  color: #565453;
+  font-size: clamp(11px, 3.4vw, 28.5px);
+  line-height: 1.45;
+}
+
+/* Tablet (and small desktop): keep the desktop-style two-column hero. */
+@media (min-width: 875px) and (max-width: 1279px) {
+  html {
+    /* A fixed root lets rem-sized content grow with browser zoom. */
+    font-size: 9.25px;
+  }
+
+  .hours-bar {
+    height: 2.3125rem;
+    min-height: 0;
+    gap: 1.875rem;
+    font-size: 1.11rem;
+  }
+
+  .site-navigation {
+    height: 10.3125rem;
+    min-height: 0;
+    padding-inline: 5.4rem;
+  }
+
+  .site-navigation.is-sticky {
+    height: 8rem;
+  }
+
+  .site-logo {
+    width: 22.49rem;
+  }
+
+  .site-navigation.is-sticky .site-logo {
+    width: 22.49rem;
+  }
+
+  .menu-button {
+    width: 10.3125rem;
+    height: 10.3125rem;
+    flex-basis: 10.3125rem;
+    transform: translateX(calc(5.15625rem - 24px));
+  }
+
+  .site-navigation.is-sticky .menu-button {
+    width: 8rem;
+    height: 8rem;
+    flex-basis: 8rem;
+    transform: translateX(calc(4rem - 24px));
+  }
+
+  .nav-links {
+    position: static;
+    display: flex;
+    width: min(61.5rem, 47.3vw);
+    height: 100%;
+    align-items: stretch;
+    justify-content: space-between;
+    transform: none;
+    color: #fff;
+    font-family: "Figtree", Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.25rem, 1.1vw, 1.514rem);
+    white-space: nowrap;
+  }
+
+  .menu-icon {
+    width: 3.9rem;
+    max-width: none;
+  }
+
+  .hero {
+    height: 59.8rem;
+    min-height: 0;
+    background: var(--cream);
+    color: #111;
+  }
+
+  .hero-texture {
+    right: auto;
+    /* Shrink in the same proportion as the hero image's tablet offset. */
+    width: clamp(33.4rem, calc(31.85vw + 3.26rem), 47.3rem);
+    background-position: left center;
+    background-size: 100% 100%;
+  }
+
+  .hero-content {
+    display: flex;
+    width: min(110.2rem, 100%);
+    /* Use the hero's full height so this row can sit at its vertical center. */
+    height: 100%;
+    min-height: 0;
+    align-items: center;
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .hero-image-frame {
+    width: 40.4%;
+    max-width: none;
+    /* Move from 12% at 875px to 17% at 1279px. */
+    margin-left: clamp(12%, calc(16.9vw - 4.64rem), 17%);
+    aspect-ratio: 0.923;
+  }
+
+  .photo-border {
+    top: 6.1%;
+    left: -8.25%;
+    width: 76.5%;
+    height: 93.9%;
+    border: 3px solid var(--gold);
+  }
+
+  .hero-portrait {
+    top: 0;
+    left: 0.3%;
+    width: 89.5%;
+    height: 93%;
+  }
+
+  .hero-copy {
+    display: flex;
+    max-width: none;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 38%;
+    margin-left: 1.7%;
+    padding: 0;
+  }
+
+  .hero-heading {
+    height: 14.486rem;
+  }
+
+  .heading-main {
+    color: #111;
+    font-size: clamp(6.1rem, 6vw, 6.919rem);
+  }
+
+  .heading-script {
+    top: 52%;
+    left: 1.4%;
+    height: 6.843rem;
+    color: var(--burgundy);
+    font-size: clamp(10.8rem, 11vw, 12rem);
+  }
+
+  .hero-description {
+    /* Use the remaining viewport width so the paragraph stays on-screen. */
+    width: min(105%, 38vw);
+    margin: 5.163rem 0;
+    color: #111;
+    font-size: 2.162rem;
+    line-height: 1.35;
+  }
+
+  .cta-visual {
+    width: 24rem;
+    max-width: 100%;
+    height: 5.6rem;
+    max-height: none;
+  }
+
+  .cta-visual span {
+    margin-left: 2.2rem;
+    font-size: 1.73rem;
+  }
+
+  .cta-visual img {
+    width: 3.5rem;
+    max-width: none;
+  }
+
+  .benefits {
+    min-height: 17.44rem;
+  }
+
+  .benefit-grid {
+    width: 79%;
+    margin-inline: auto;
+    flex-wrap: nowrap;
+  }
+
+  .benefit-card {
+    flex: 1 1 25%;
+    min-height: 17.1rem;
+    padding: 0 1rem;
+  }
+
+  .benefit-card:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .benefit-card:not(:last-child) {
+    position: relative;
+  }
+
+  .benefit-card:not(:last-child)::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 4.2rem;
+    transform: translateY(-50%);
+    background: var(--divider);
+    content: "";
+  }
+
+  .benefit-card:nth-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .benefit-card h2 {
+    margin-bottom: 1.3rem;
+    font-size: 1.807rem;
+    white-space: normal;
+  }
+
+  .benefit-card p {
+    max-width: 22rem;
+    font-size: 1.485rem;
+  }
+}
+
+/* Desktop: one fixed rem scale keeps the page responsive to browser zoom. */
+@media (min-width: 1280px) {
+  html {
+    /* Scale smoothly from 75% at 1280px to the reference size at 1920px. */
+    font-size: clamp(9px, calc(3px + 0.46875vw), 12px);
+  }
+
+  .hours-bar {
+    height: 2.3125rem;
+    min-height: 0;
+    gap: 1.875rem;
+    font-size: clamp(10px, 0.96rem, 11.52px);
+  }
+
+  .site-navigation {
+    height: 10.3125rem;
+    min-height: 0;
+    padding-inline: 9.6875rem;
+  }
+
+  .site-navigation.is-sticky {
+    height: 8rem;
+  }
+
+  .site-logo {
+    width: 22.44rem;
+    max-width: none;
+  }
+
+  .site-navigation.is-sticky .site-logo {
+    width: 22.44rem;
+  }
+
+  .menu-button {
+    width: 10.3125rem;
+    height: 10.3125rem;
+    flex-basis: 10.3125rem;
+    transform: translateX(calc(5.15625rem - 24px));
+  }
+
+  .site-navigation.is-sticky .menu-button {
+    width: 8rem;
+    height: 8rem;
+    flex-basis: 8rem;
+    transform: translateX(calc(4rem - 24px));
+  }
+
+  .nav-links {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    display: flex;
+    width: 52rem;
+    height: 100%;
+    align-items: stretch;
+    justify-content: space-between;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: "Figtree", Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(13.5px, 1.24rem, 14.9px);
+    white-space: nowrap;
+  }
+
+  .menu-icon {
+    width: 3rem;
+    max-width: none;
+  }
+
+  .hero {
+    height: 59.8rem;
+    min-height: 0;
+    background: var(--cream);
+    color: #111;
+  }
+
+  .hero-texture {
+    right: auto;
+    /* Extend the burgundy field behind the hero photo as the content shifts inward. */
+    width: calc(47.3rem + max(0px, calc(50% - 80rem)));
+    background-position: left center;
+    background-size: 100% 100%;
+  }
+
+  .hero-content {
+    display: flex;
+    width: min(110.08rem, calc(100% - 2rem));
+    /* Center the image and copy between the navigation and benefit cards. */
+    height: 100%;
+    min-height: 0;
+    align-items: center;
+    flex-direction: row;
+    /* Keep the 1920px composition in place, then center it on wider screens. */
+    margin-left: max(0px, calc(50% - 80rem));
+    padding: 0;
+  }
+
+  .hero-image-frame {
+    width: 40.4%;
+    max-width: none;
+    margin-left: 19.9%;
+    aspect-ratio: 0.923;
+  }
+
+  .photo-border {
+    top: 6.1%;
+    left: 0;
+    width: 76.5%;
+    height: 93.9%;
+    border-width: 0.375rem;
+  }
+
+  .hero-portrait {
+    top: 0;
+    left: 10.53%;
+    width: 89.47%;
+    height: 93%;
+  }
+
+  .hero-copy {
+    display: flex;
+    width: 32.7%;
+    max-width: none;
+    height: 34.2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4.375rem;
+    margin-left: 7%;
+    padding: 0;
+  }
+
+  .hero-heading {
+    height: 15rem;
+  }
+
+  .heading-main {
+    position: absolute;
+    top: 0.125rem;
+    left: 0;
+    color: #111;
+    font-size: clamp(62px, 5.9375rem, 71.25px);
+    letter-spacing: -0.03em;
+  }
+
+  .heading-script {
+    /* The transform centers this line on the chosen position below the main title. */
+    top: 7.5rem;
+    left: 0.5rem;
+    height: 8rem;
+    color: var(--burgundy);
+    font-size: clamp(108px, 10.375rem, 124.5px);
+    line-height: 0.78;
+  }
+
+  .hero-description {
+    width: 97%;
+    margin: 0;
+    color: #111;
+    font-size: clamp(17px, 1.375rem, 16.5px);
+    line-height: 2.2rem;
+  }
+
+  .cta-visual {
+    width: 248px;
+    max-width: 100%;
+    height: 58px;
+    max-height: none;
+  }
+
+  .cta-visual span {
+    margin-left: 2.1875rem;
+    font-size: clamp(14px, 1.21rem, 14.5px);
+  }
+
+  .cta-visual img {
+    width: 3rem;
+    max-width: none;
+  }
+
+  .benefit-grid {
+    width: min(97.58rem, calc(100% - 2rem));
+    min-height: 17.44rem;
+    margin-inline: auto;
+    flex-wrap: nowrap;
+  }
+
+  .benefit-card {
+    position: relative;
+    flex: 1 1 25%;
+    min-height: 17.44rem;
+    padding: 0 1.5rem;
+  }
+
+  .benefit-card:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .benefit-card:not(:last-child)::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 4.2rem;
+    transform: translateY(-50%);
+    background: var(--divider);
+    content: "";
+  }
+
+  .benefit-card:nth-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .benefit-card h2 {
+    max-width: 100%;
+    margin-bottom: 1.25rem;
+    font-size: clamp(18px, 1.75rem, 21px);
+    white-space: nowrap;
+  }
+
+  .benefit-card p {
+    max-width: 18rem;
+    font-size: clamp(13px, 1.2rem, 14.4px);
+    line-height: 1.4;
+  }
+}
+
+/* Entrance animations stay short and small so the page feels lively, not busy. */
+html.motion-ready [data-entrance]:not(.is-visible) {
+  opacity: 0;
+}
+
+html.motion-ready [data-entrance="fade-up"]:not(.is-visible) {
+  translate: 0 16px;
+}
+
+html.motion-ready [data-entrance="fade-down"]:not(.is-visible) {
+  translate: 0 -10px;
+}
+
+html.motion-ready [data-entrance="fade-left"]:not(.is-visible) {
+  translate: -14px 0;
+}
+
+html.motion-ready [data-entrance="scale-in"]:not(.is-visible) {
+  scale: 0.98;
+}
+
+html.motion-ready [data-entrance].is-visible {
+  animation-delay: var(--entrance-delay, 0ms);
+  animation-duration: 650ms;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.motion-ready [data-entrance="fade"].is-visible {
+  animation-name: entrance-fade;
+}
+
+html.motion-ready [data-entrance="fade-up"].is-visible {
+  animation-name: entrance-fade-up;
+}
+
+html.motion-ready [data-entrance="fade-down"].is-visible {
+  animation-name: entrance-fade-down;
+}
+
+html.motion-ready [data-entrance="fade-left"].is-visible {
+  animation-name: entrance-fade-left;
+}
+
+html.motion-ready [data-entrance="scale-in"].is-visible {
+  animation-name: entrance-scale-in;
+}
+
+/* Draw the active-page rule after the navigation links have appeared. */
+html.motion-ready .nav-links .is-current::before {
+  width: 0;
+  opacity: 0;
+}
+
+html.motion-ready .nav-links.is-visible .is-current::before {
+  animation: home-indicator-draw 450ms ease-out
+    calc(var(--entrance-delay, 0ms) + 300ms) both;
+}
+
+@keyframes entrance-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes entrance-fade-up {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes entrance-fade-down {
+  from {
+    opacity: 0;
+    translate: 0 -10px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes entrance-fade-left {
+  from {
+    opacity: 0;
+    translate: -14px 0;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes entrance-scale-in {
+  from {
+    opacity: 0;
+    scale: 0.98;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes home-indicator-draw {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+
+  to {
+    width: 8rem;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.motion-ready [data-entrance] {
+    opacity: 1;
+    translate: none;
+    scale: none;
+    animation: none;
+  }
+
+  html.motion-ready .nav-links .is-current::before {
+    width: 8rem;
+    opacity: 1;
+    animation: none;
+  }
+
+  .hero-portrait,
+  .site-navigation,
+  .site-logo,
+  .nav-links > span,
+  .menu-icon,
+  .cta-visual {
+    transition: none;
+  }
+
+  .cta-visual img {
+    transition: none;
+  }
+
+  .cta-visual:hover img {
+    transform: translateY(-50%);
+  }
+}
+
