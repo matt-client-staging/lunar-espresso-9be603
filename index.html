@@ -161,6 +161,117 @@
           </article>
         </div>
       </section>
+
+      <!-- Latest News repeats the hero's two-column layout with a landscape photo. -->
+      <section class="latest-news" aria-labelledby="latest-news-title">
+        <div class="hero-content latest-news-content">
+          <div
+            class="latest-news-image-frame"
+            data-entrance="scale-in"
+          >
+            <div class="latest-news-photo-border" aria-hidden="true"></div>
+            <img
+              class="latest-news-image"
+              src="./assets/placeholder.png"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div class="latest-news-copy">
+            <div class="latest-news-heading-group" data-entrance="fade-up">
+              <span class="latest-news-kicker">LATEST NEWS</span>
+              <h2 class="latest-news-title" id="latest-news-title">
+                Christmas Hours
+              </h2>
+            </div>
+
+            <div class="latest-news-body" data-entrance="fade-up">
+              <p>
+                Northern Smiles Dental Hygiene Clinic will be
+                <strong>closed from December 24th to December 27th.</strong>
+                We’ll reopen and
+                <strong>resume regular hours on Monday, December 28th.</strong>
+              </p>
+              <p>
+                If you’d like to schedule an appointment or have any questions
+                during this time, please feel free to leave a message—our team
+                will get back to you as soon as possible once we return.
+              </p>
+            </div>
+
+            <!-- Keep the same visual CTA treatment; link behavior can be added later. -->
+            <div
+              class="cta-visual latest-news-cta"
+              aria-label="Follow us on Facebook for more updates"
+              data-entrance="fade-up"
+            >
+              <span>FOLLOW US ON FACEBOOK FOR MORE UPDATES</span>
+              <img src="./assets/arrow-right.svg" alt="" aria-hidden="true" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Patient reviews rotate between three soft background colors. -->
+      <section
+        class="testimonials"
+        id="testimonial-carousel"
+        aria-label="Patient testimonials"
+        aria-roledescription="carousel"
+      >
+        <div class="testimonial-content" data-entrance="fade-up">
+          <img
+            class="testimonial-quotation-mark"
+            src="./assets/quotation_marks.png"
+            alt=""
+            aria-hidden="true"
+          />
+
+          <div class="testimonial-quote-stage">
+            <blockquote
+              class="testimonial-quote is-active"
+              data-background="#d8e3cf"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="1 of 3"
+            >
+              “I love the staff, they are always very accommodating to my
+              schedule. I won’t go anywhere else to get my teeth cleaned. Nat
+              and her team are excellent!”
+            </blockquote>
+
+            <blockquote
+              class="testimonial-quote"
+              data-background="#CFE3DE"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="2 of 3"
+              aria-hidden="true"
+            >
+              “Friendliest, most professional and comfortable dental hygiene
+              clinic.”
+            </blockquote>
+
+            <blockquote
+              class="testimonial-quote"
+              data-background="#E3D5CF"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="3 of 3"
+              aria-hidden="true"
+            >
+              “Had a great hygienist today. Thanks Mel!”
+            </blockquote>
+          </div>
+
+          <div class="testimonial-footer">
+            <span class="testimonial-attribution">– Patient review</span>
+          </div>
+        </div>
+      </section>
     </main>
   </body>
 </html>

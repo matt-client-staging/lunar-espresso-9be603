@@ -136,31 +136,93 @@ if (
     (element) => !element.hasAttribute("data-entrance-on-load")
   );
 
-  // Benefits appear as they enter view, then stay visible for the rest of the visit.
+  // Benefits, news, and testimonials appear as they enter view, then stay visible.
   const entranceObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
 
-        const siblingEntrances = Array.from(
-          entry.target.parentElement.querySelectorAll(
-            '[data-entrance]:not([data-entrance-on-load])'
-          )
-        );
-        const staggerIndex = siblingEntrances.indexOf(entry.target);
-
-        entry.target.style.setProperty(
-          "--entrance-delay",
-          `${staggerIndex * 90}ms`
-        );
-        entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
+
+        const revealElement = () => {
+          const siblingEntrances = Array.from(
+            entry.target.parentElement.querySelectorAll(
+              '[data-entrance]:not([data-entrance-on-load])'
+            )
+          );
+          const staggerIndex = siblingEntrances.indexOf(entry.target);
+
+          entry.target.style.setProperty(
+            "--entrance-delay",
+            `${staggerIndex * 90}ms`
+          );
+          entry.target.classList.add("is-visible");
+        };
+
+        const newsImage = entry.target.matches(".latest-news-image-frame")
+          ? entry.target.querySelector(".latest-news-image")
+          : null;
+
+        // Wait for the lazy-loaded photo to decode before revealing its frame.
+        if (newsImage) {
+          waitForImageReady(newsImage).then(revealElement);
+        } else {
+          revealElement();
+        }
       });
     },
     { threshold: 0.12, rootMargin: "0px 0px -36px 0px" }
   );
 
   scrollElements.forEach((element) => entranceObserver.observe(element));
+}
+
+// Rotate the patient quotes and matching background colors every five seconds.
+const testimonialSection = document.querySelector(".testimonials");
+const testimonialSlides = Array.from(
+  document.querySelectorAll(".testimonial-quote")
+);
+
+if (testimonialSection && testimonialSlides.length > 1) {
+  let activeTestimonial = testimonialSlides.findIndex((slide) =>
+    slide.classList.contains("is-active")
+  );
+  let testimonialTimer = null;
+
+  function showTestimonial(slideIndex) {
+    testimonialSlides.forEach((slide, index) => {
+      const isActive = index === slideIndex;
+      slide.classList.toggle("is-active", isActive);
+      slide.setAttribute("aria-hidden", String(!isActive));
+    });
+
+    testimonialSection.style.backgroundColor =
+      testimonialSlides[slideIndex].dataset.background;
+    activeTestimonial = slideIndex;
+  }
+
+  function stopTestimonialRotation() {
+    window.clearTimeout(testimonialTimer);
+    testimonialTimer = null;
+  }
+
+  function scheduleTestimonialRotation() {
+    stopTestimonialRotation();
+    if (document.hidden) return;
+
+    testimonialTimer = window.setTimeout(() => {
+      const nextTestimonial = (activeTestimonial + 1) % testimonialSlides.length;
+      showTestimonial(nextTestimonial);
+      scheduleTestimonialRotation();
+    }, 5000);
+  }
+
+  // Reduced-motion users keep the featured first review without any rotation.
+  // Avoid advancing quotes while the visitor is on another browser tab.
+  if (!prefersReducedMotion) {
+    document.addEventListener("visibilitychange", scheduleTestimonialRotation);
+    scheduleTestimonialRotation();
+  }
 }
 
 const heroFrame = document.querySelector(".hero-image-frame");

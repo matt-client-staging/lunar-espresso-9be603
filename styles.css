@@ -77,6 +77,14 @@ body {
   font-size: 16px;
 }
 
+/* One shared style for body paragraphs; special display text gets its own class. */
+p {
+  margin: 0;
+  color: #111;
+  font-size: clamp(14.5px, 4vw, 38px);
+  line-height: 1.5;
+}
+
 /* Keep Chrome from shifting the scroll threshold as the sticky menu shrinks. */
 main {
   overflow-anchor: none;
@@ -129,7 +137,7 @@ img {
 .site-navigation.is-sticky {
   height: 16.85vw;
   min-height: 56px;
-  background-color: rgba(245, 239, 230, 0.76);
+  background-color: rgba(245, 239, 230, 0.5);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
@@ -228,7 +236,11 @@ img {
 }
 
 .site-navigation.is-sticky .nav-links {
-  color: #423f39;
+  color: #000;
+}
+
+.site-navigation.is-sticky .menu-icon {
+  color: #000;
 }
 
 .site-navigation.is-sticky .nav-links .is-current,
@@ -367,7 +379,7 @@ img {
   margin: 21.14vw 0 12.44vw;
   color: #fff;
   font-size: clamp(16px, 4.975vw, 42px);
-  line-height: 1.25;
+  line-height: 1.5;
 }
 
 .hero-description strong {
@@ -412,9 +424,184 @@ img {
   transform: translate(5px, -50%);
 }
 
+/* Latest News follows the hero layout, with a shorter landscape photo. */
+.latest-news {
+  margin-block: clamp(4rem, 9vw, 9rem);
+  padding-block: 9.95vw;
+  background: var(--cream);
+  color: #111;
+}
+
+.latest-news-content {
+  /* The section owns the vertical spacing; keep the hero's side inset. */
+  padding: 0 0 0 8.6vw;
+}
+
+.latest-news-image-frame {
+  position: relative;
+  width: 80.85vw;
+  flex: 0 0 auto;
+  aspect-ratio: 712 / 636;
+}
+
+.latest-news-photo-border {
+  position: absolute;
+  top: 7.2%;
+  left: 0;
+  width: 76.5%;
+  height: 80%;
+  border: 2.4px solid #ddcca1;
+}
+
+.latest-news-image {
+  position: absolute;
+  top: 0;
+  left: 9.4%;
+  width: 90.6%;
+  height: 78.6%;
+  object-fit: cover;
+}
+
+.latest-news-copy {
+  display: flex;
+  width: 82.3vw;
+  max-width: 600px;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7vw;
+  padding: 1.5vw 0 0;
+}
+
+.latest-news-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw;
+}
+
+.latest-news-kicker {
+  color: var(--burgundy);
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+  font-size: clamp(12px, 3.2vw, 17px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.latest-news-title {
+  margin: 0;
+  color: #111;
+  font-family: "Albra", Georgia, serif;
+  font-size: clamp(2.35rem, 10.5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.latest-news-body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 4vw;
+}
+
+.latest-news-body strong {
+  font-weight: 500;
+}
+
+.latest-news-cta {
+  width: 100%;
+  max-width: 42rem;
+}
+
+.latest-news-cta span {
+  margin-left: clamp(12px, 4vw, 20px);
+  font-size: clamp(10.5px, 2.85vw, 14px);
+}
+
+.latest-news-cta img {
+  right: 5%;
+  width: clamp(22px, 5.5vw, 32px);
+}
+
+/* Keep the testimonial centered while its quote and background change together. */
+.testimonials {
+  display: flex;
+  min-height: clamp(19rem, 28.8vh, 26rem);
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  background-color: #d8e3cf;
+  transition: background-color 700ms ease;
+}
+
+.testimonial-content {
+  position: relative;
+  display: flex;
+  width: min(100%, 100rem);
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.testimonial-quotation-mark {
+  width: clamp(2.5rem, 4vw, 4rem);
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+/* Stacking the quotes lets the outgoing and incoming lines crossfade. */
+.testimonial-quote-stage {
+  display: grid;
+  width: 100%;
+}
+
+.testimonial-quote {
+  grid-area: 1 / 1;
+  align-self: center;
+  width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
+  color: #111;
+  font-family: "Albra", Georgia, serif;
+  font-size: clamp(1.25rem, 2.25vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(0.25rem);
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
+}
+
+.testimonial-quote.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.testimonial-footer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: clamp(1.75rem, 3vw, 3.5rem);
+}
+
+.testimonial-attribution {
+  color: #111;
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+  line-height: 1.5;
+}
+
+@media (max-width: 874px) {
+  .testimonial-quotation-mark {
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-footer {
+    margin-top: 1rem;
+  }
+}
+
 .benefits {
-  /* Keep the extra gap outside this block so the page background shows through. */
-  margin-bottom: clamp(2rem, 4vw, 4rem);
   background: var(--card-sand);
 }
 
@@ -457,10 +644,7 @@ img {
 
 .benefit-card p {
   max-width: 24vw;
-  margin: 0;
   color: #565453;
-  font-size: clamp(11px, 3.4vw, 28.5px);
-  line-height: 1.45;
 }
 
 /* Tablet (and small desktop): keep the desktop-style two-column hero. */
@@ -468,6 +652,11 @@ img {
   html {
     /* A fixed root lets rem-sized content grow with browser zoom. */
     font-size: 9.25px;
+  }
+
+  p {
+    font-size: 1.85rem;
+    line-height: 1.5;
   }
 
   .hours-bar {
@@ -612,7 +801,7 @@ img {
     margin: 5.163rem 0;
     color: #111;
     font-size: 2.162rem;
-    line-height: 1.35;
+    line-height: 1.5;
   }
 
   .cta-visual {
@@ -630,6 +819,83 @@ img {
   .cta-visual img {
     width: 3.5rem;
     max-width: none;
+  }
+
+  .latest-news {
+    display: flex;
+    align-items: center;
+    padding-block: 0;
+  }
+
+  .latest-news-content {
+    height: auto;
+    min-height: 0;
+    margin-block: 0;
+    align-self: center;
+    /* Let the image and copy share a common top edge inside the centered row. */
+    align-items: stretch;
+  }
+
+  .latest-news-image-frame {
+    width: 40.4%;
+    max-width: none;
+    align-self: flex-start;
+    margin-left: clamp(12%, calc(16.9vw - 4.64rem), 17%);
+  }
+
+  .latest-news-photo-border {
+    top: 6.1%;
+    left: -8.25%;
+    width: 76.5%;
+    height: 91.4%;
+    border-width: 3px;
+  }
+
+  .latest-news-image {
+    left: 0.3%;
+    width: 90%;
+    height: 90%;
+  }
+
+  .latest-news-copy {
+    width: 42%;
+    max-width: none;
+    margin-left: 1.7%;
+    gap: 3.3rem;
+    /* Stretch the copy to the row height and keep its CTA at the bottom edge. */
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .latest-news-heading-group {
+    gap: 0.8rem;
+  }
+
+  .latest-news-kicker {
+    font-size: 1.3rem;
+  }
+
+  .latest-news-title {
+    font-size: clamp(4.2rem, 5vw, 6rem);
+  }
+
+  .latest-news-body {
+    gap: 2.5rem;
+  }
+
+  .latest-news-cta {
+    width: 42rem;
+    max-width: 100%;
+    height: 5.6rem;
+  }
+
+  .latest-news-cta span {
+    margin-left: 2rem;
+    font-size: 1.45rem;
+  }
+
+  .latest-news-cta img {
+    width: 2.7rem;
   }
 
   .benefits {
@@ -679,7 +945,6 @@ img {
 
   .benefit-card p {
     max-width: 22rem;
-    font-size: 1.485rem;
   }
 }
 
@@ -688,6 +953,11 @@ img {
   html {
     /* Scale smoothly from 75% at 1280px to the reference size at 1920px. */
     font-size: clamp(9px, calc(3px + 0.46875vw), 12px);
+  }
+
+  p {
+    font-size: clamp(17px, 1.375rem, 16.5px);
+    line-height: 2.2rem;
   }
 
   .hours-bar {
@@ -862,6 +1132,84 @@ img {
     max-width: none;
   }
 
+  .latest-news {
+    display: flex;
+    align-items: center;
+    padding-block: 0;
+  }
+
+  .latest-news-content {
+    height: auto;
+    min-height: 0;
+    margin-block: 0;
+    align-self: center;
+    /* Let the image and copy share a common top edge inside the centered row. */
+    align-items: stretch;
+  }
+
+  .latest-news-image-frame {
+    width: 40.4%;
+    max-width: none;
+    align-self: flex-start;
+    margin-left: 19.9%;
+  }
+
+  .latest-news-photo-border {
+    top: 7.2%;
+    width: 76.5%;
+    height: 91.4%;
+    border-width: 0.375rem;
+  }
+
+  .latest-news-image {
+    left: 10%;
+    width: 90%;
+    height: 90%;
+  }
+
+  .latest-news-copy {
+    width: 42%;
+    max-width: none;
+    height: auto;
+    gap: 4.375rem;
+    margin-left: 7%;
+    /* Stretch the copy to the row height and keep its CTA at the bottom edge. */
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .latest-news-heading-group {
+    gap: 1rem;
+  }
+
+  .latest-news-kicker {
+    font-size: clamp(1.15rem, 1.1vw, 1.35rem);
+  }
+
+  .latest-news-title {
+    font-size: clamp(3.6rem, 3.6vw, 5.9375rem);
+  }
+
+  .latest-news-body {
+    gap: 2.5rem;
+  }
+
+  .latest-news-cta {
+    width: 42rem;
+    max-width: 100%;
+    height: 58px;
+  }
+
+  .latest-news-cta span {
+    margin-left: 2.1875rem;
+    font-size: clamp(14px, 1.21rem, 14.5px);
+  }
+
+  .latest-news-cta img {
+    width: 3rem;
+    max-width: none;
+  }
+
   .benefit-grid {
     width: min(97.58rem, calc(100% - 2rem));
     min-height: 17.44rem;
@@ -904,8 +1252,11 @@ img {
 
   .benefit-card p {
     max-width: 18rem;
-    font-size: clamp(13px, 1.2rem, 14.4px);
-    line-height: 1.4;
+  }
+
+  .testimonial-quote,
+  .testimonial-attribution {
+    line-height: 1.3;
   }
 }
 
@@ -1062,6 +1413,11 @@ html.motion-ready .nav-links.is-visible .is-current::before {
   }
 
   .cta-visual img {
+    transition: none;
+  }
+
+  .testimonials,
+  .testimonial-quote {
     transition: none;
   }
 
